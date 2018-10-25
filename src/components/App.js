@@ -21,6 +21,7 @@ class App extends Component {
         const fd = new FormData();
         fd.append('file', this.state.uploadedFile, this.state.uploadedFile.name);
         fd.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+        fd.append('folder', 'browser_upload');
         for (let pair of fd.entries()) {
             console.log(pair[0]+ ', ' + pair[1]);
         }
@@ -46,22 +47,29 @@ class App extends Component {
         const config = {
             method: "GET"
         };
-        fetch('https://api.cloudinary.com/v1_1/ucg/resources/image/upload', config)
+        fetch('https://res.cloudinary.com/ucg/image/list/samples.json', config)
             .then(res => {
-                console.log(res.data.resources);
-                this.setState({gallery: res.data.resources});
+                return res.json();
+            })
+            .then(data => {
+                console.log(data.resources);
+                this.setState({
+                    gallery: data.resources
+                })
             })
             .catch(err => {
                 console.error(err);
             })
     }
     render() {
+        const {gallery} = this.state;
+        const galleryItems = gallery.map((galleryItem, i) => <Image cloudName="ucg" key={i} publicId={galleryItem.public_id} width="300" crop="scale"/>);
         return (
             <div className="App">
                 <input type="file" id='img_load' onChange={this.selectFileHandler}/>
                 <label htmlFor="img_load">Pick your image</label>
                 <button onClick={this.submitFileHandler}>Upload Image</button>
-                <Image cloudName="demo" publicId={this.state.uploadedFileCloudinaryUrl} width="300" crop="scale"/>
+                {galleryItems}
             </div>
         );
     }
