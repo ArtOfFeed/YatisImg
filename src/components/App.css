@@ -9,11 +9,16 @@ body {
     font-size: 14px;
     font-family: 'Raleway', sans-serif;
 }
-.App input {
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.app .img_load {
     display: none;
 }
-.App label,
-.App button {
+.app .img_load + label,
+.app button {
     width: 160px;
     line-height: 38px;
     display: block;
@@ -29,7 +34,68 @@ body {
     border-radius: 3px;
     cursor: pointer;
 }
-.App button {
+.app button {
     background: #333;
     color: #ff8300;
+}
+.group {
+    width: 300px;
+    position: relative;
+    margin: 15px auto;
+}
+.group label {
+    margin: 10px 0;
+    display: block;
+    text-align: center;
+}
+.group .img_description {
+    border: none;
+    border-bottom: 1px solid #dedede;
+    width: 100%;
+    display: block;
+    line-height: 30px;
+    outline: none;
+}
+.group .bar:before,
+.group .bar:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: #ff8300;
+    transition: width 0.3s ease;
+}
+.group .bar:after {
+    right: 0;
+    left: auto;
+    transform: rotate(180deg);
+}
+.group .img_description:focus ~ .bar:before,
+.group .img_description:focus ~ .bar:after {
+    width: 50%;
+}
+.app .item_img {
+    margin: 15px auto;
+    width: 300px;
+    position: relative;
+}
+.app .edit_panel {
+    background: rgba(0,0,0, 0.6);
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 5px;
+}
+.app .edit_panel i {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 5px;
+    width: 20px;
+    height: 20px;
+    background: red;
+}
+.app .edit_panel .edit {
+    background: green;
 }
