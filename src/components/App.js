@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
+
 import {Image} from 'cloudinary-react';
 import MaterialIcon from 'material-icons-react';
 
