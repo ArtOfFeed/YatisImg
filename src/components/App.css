@@ -2,6 +2,11 @@
 * {
     box-sizing: border-box;
 }
+:root {
+    --orange: #ff8300;
+    --black: #333;
+    --rgb-black: rgba(0, 0, 0, 0.75);
+}
 body {
     padding: 0;
     margin: 0;
@@ -9,27 +14,149 @@ body {
     font-size: 14px;
     font-family: 'Raleway', sans-serif;
 }
-.App input {
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.app .no_img {
+    text-align: center;
+    width: 100%;
+    font-size: 18px;
+    margin: 20px 0;
+    font-weight: 500;
+}
+.app .img_load {
     display: none;
 }
-.App label,
-.App button {
+.app .img_load + label,
+.app button {
     width: 160px;
     line-height: 38px;
     display: block;
     margin: 10px auto;
     box-shadow: 0 4px 2px -2px #bbb;
     text-transform: uppercase;
-    background: #ff8300;
-    color: #333;
+    background: var(--orange);
+    color: var(--black);
     border: none;
     outline: none;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
     cursor: pointer;
+    font-family: 'Raleway', sans-serif;
 }
-.App button {
-    background: #333;
-    color: #ff8300;
+.app button {
+    background: var(--black);
+    color: var(--orange);
+}
+.app .list_item_img {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    width: 1000px;
+    flex-wrap: wrap;
+    margin: auto;
+}
+.app .img_item {
+    position: relative;
+    text-align: center;
+}
+.app .img_item .remove {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 25px;
+    height: 25px;
+    background: rgba(0,0,0, 0.75);
+    text-align: center;
+    padding-top: 3px;
+    cursor: pointer;
+}
+.app .group {
+    width: 300px;
+    margin: 15px auto;
+    position: relative;
+}
+.app input[type='text'] {
+    border: none;
+    border-bottom: 1px solid #cacaca;
+    line-height: 30px;
+    width: 100%;
+    padding: 0 5px;
+    display: block;
+    outline: none;
+}
+.app .bar:before,
+.app .bar:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 0;
+    background: var(--orange);
+    transition: width 0.3s ease;
+}
+.app .bar:after {
+    transform: rotate(180deg);
+    right: 0;
+    left: auto;
+}
+.app input[type='text']:focus ~ .bar:before,
+.app input[type='text']:focus ~ .bar:after {
+    width: 50%;
+}
+.app .save_descr {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 3px 0 0;
+    margin: 0;
+}
+.app .wrapper_img {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.app .wrapper_img:before {
+    content: attr(data-tooltip);
+    width: 160px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background: var(--rgb-black);
+    color: #fff;
+    text-align: center;
+    line-height: 30px;
+    left: 50%;
+    top: 50%;
+    position: absolute;
+    transform: translate3d(-50%, -75%, 0);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.3s ease 0.1s;
+}
+.app .wrapper_img:hover:before {
+    opacity: 1;
+    transform: translate3d(-50%, -50%, 0);
+}
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .app .list_item_img {
+        width: 680px;
+    }
+}
+@media screen and (max-width: 767px) {
+    .app .list_item_img {
+        display: block;
+        width: 100%;
+    }
+    .app .img_item {
+        display: block;
+        width: 300px;
+        margin: 15px auto;
+    }
 }
